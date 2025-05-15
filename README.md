@@ -14,5 +14,5 @@ tool for generating supervised fine-tuning (SFT) data from arxiv papers.
    bun install
    bun dev
    ```
-   -open [http://localhost:3000](http://localhost:3000) in your browser
+   open [http://localhost:3000](http://localhost:3000) in your browser
 
