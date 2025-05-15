@@ -1,6 +1,6 @@
 # Model Comparison and SFT Pipeline
 
-tool for generating supervised fine-tuning (SFT) data from arxiv papers on operations research.
+tool for generating supervised fine-tuning (SFT) data from arxiv papers.
 
 ## SFT Data Generation Pipeline
    ```bash
