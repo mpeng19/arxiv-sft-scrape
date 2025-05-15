@@ -122,7 +122,6 @@
   }
 }
 
-/* Markdown and Math Styling */
 .markdown-wrapper .markdown-content,
 .markdown-wrapper .katex-display {
   overflow-x: auto;
@@ -216,7 +215,6 @@
   background-color: hsl(var(--muted));
 }
 
-/* KaTeX specific styles */
 .katex-display {
   margin: 1rem 0;
   overflow-x: auto;
@@ -231,21 +229,18 @@
   max-width: 100%;
 }
 
-/* Better styles for inline and display math */
 .katex-display > .katex {
   display: block;
   text-align: center;
   max-width: 100%;
 }
 
-/* Fix for inline LaTeX expressions */
 .katex-inline {
   display: inline-block;
   margin: 0 0.2em;
   vertical-align: middle;
 }
 
-/* Make sure colors are properly inherited */
 .katex .mord,
 .katex .mbin,
 .katex .mrel,
@@ -260,14 +255,12 @@
   color: inherit !important;
 }
 
-/* Fix for LaTeX rendering issues */
 .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.5em 0;
 }
 
-/* Fix for red text in LaTeX */
 .markdown-content .katex .mord.text {
   color: inherit !important;
 }
@@ -285,7 +278,7 @@
   border-color: inherit !important;
 }
 
-/* Fix specifically for "x^2+2x+1=0" format */
+/* Fix for "x^2+2x+1=0" format */
 .markdown-content span.mbin,
 .markdown-content span.mord,
 .markdown-content span.mrel,
@@ -297,7 +290,6 @@
   color: inherit !important;
 }
 
-/* Improve spacing for inline math */
 .markdown-content p {
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -310,13 +302,11 @@ html, body {
   padding: 0;
 }
 
-/* Ensure the main container takes full height but doesn't overflow */
 body > div {
   height: 100vh;
   overflow: hidden;
 }
 
-/* Ensure scrollable content scrolls properly */
 .scrollable-content {
   overflow-y: auto;
   height: 100%;

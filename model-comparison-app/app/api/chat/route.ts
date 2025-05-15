@@ -28,7 +28,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if OpenAI key is provided for OpenAI models
     if ((modelA.includes('gpt') || modelA.includes('ft:')) && !openaiKey) {
       return NextResponse.json(
         { error: 'OpenAI API key is required for model A' },
@@ -43,7 +42,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if Anthropic key is provided for Claude models
     if (modelA.includes('claude') && !anthropicKey) {
       return NextResponse.json(
         { error: 'Anthropic API key is required for model A' },
@@ -83,27 +81,27 @@ async function getModelResponse(
   anthropicKey?: string
 ): Promise<string> {
   const systemPrompt = `
-Respond in the following format:
-<reasoning>
-Your step-by-step reasoning process here
-</reasoning>
-<answer>
-Your final answer here
-</answer>
+      Respond in the following format:
+      <reasoning>
+      Your step-by-step reasoning process here
+      </reasoning>
+      <answer>
+      Your final answer here
+      </answer>
 
-Important guidelines for LaTeX formatting:
-1. Always use the <reasoning> and <answer> tags in your response.
-2. Always use LaTeX syntax for mathematical expressions:
-   - Use $ for inline math: $x^2$, $\\alpha$, $\\frac{a}{b}$
-   - Use $$ for display math: $$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$
-3. Format all mathematical expressions properly with LaTeX:
-   - Variables and single letters should be in LaTeX: $x$, $n$, $\\alpha$
-   - Equations must be in LaTeX: $x^2 + 2x + 1 = 0$
-   - Fractions should use \\frac: $\\frac{a}{b}$
-   - Use proper LaTeX symbols for operations: $\\times$, $\\div$, $\\cdot$
-4. Ensure all backslashes in LaTeX expressions are properly escaped (use \\\\ instead of \\).
-5. Keep your answers concise and to the point.
-`;
+      Important guidelines for LaTeX formatting:
+      1. Always use the <reasoning> and <answer> tags in your response.
+      2. Always use LaTeX syntax for mathematical expressions:
+        - Use $ for inline math: $x^2$, $\\alpha$, $\\frac{a}{b}$
+        - Use $$ for display math: $$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$
+      3. Format all mathematical expressions properly with LaTeX:
+        - Variables and single letters should be in LaTeX: $x$, $n$, $\\alpha$
+        - Equations must be in LaTeX: $x^2 + 2x + 1 = 0$
+        - Fractions should use \\frac: $\\frac{a}{b}$
+        - Use proper LaTeX symbols for operations: $\\times$, $\\div$, $\\cdot$
+      4. Ensure all backslashes in LaTeX expressions are properly escaped (use \\\\ instead of \\).
+      5. Keep your answers concise and to the point.
+      `;
 
   try {
     if (model.includes('gpt') || model.includes('ft:')) {
@@ -127,7 +125,6 @@ Important guidelines for LaTeX formatting:
 
         let content = response.choices[0].message.content || "No response generated";
         
-        // Ensure the response has the required tags
         if (!content.includes('<reasoning>') && !content.includes('<answer>')) {
           content = `<reasoning>\nThe model did not provide explicit reasoning.\n</reasoning>\n<answer>\n${content}\n</answer>`;
         } else if (!content.includes('<reasoning>')) {
@@ -169,7 +166,6 @@ Important guidelines for LaTeX formatting:
           content = response.content[0].text;
         }
         
-        // Ensure the response has the required tags
         if (!content.includes('<reasoning>') && !content.includes('<answer>')) {
           content = `<reasoning>\nThe model did not provide explicit reasoning.\n</reasoning>\n<answer>\n${content}\n</answer>`;
         } else if (!content.includes('<reasoning>')) {

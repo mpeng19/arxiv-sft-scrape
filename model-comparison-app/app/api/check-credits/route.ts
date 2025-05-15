@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     if (provider === 'openai') {
       try {
         const openai = new OpenAI({ apiKey });
-        // OpenAI doesn't have a direct credits endpoint, so we'll check billing info
+        //Check billing info for credits
         const response = await fetch('https://api.openai.com/dashboard/billing/credit_grants', {
           headers: {
             'Authorization': `Bearer ${apiKey}`,
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
           const data = await response.json();
           credits = `$${data.total_available.toFixed(2)}`;
         } else {
-          // Fallback to checking organization info
+          //Fallback; check organization info
           const orgResponse = await openai.organizations.list();
           if (orgResponse.data && orgResponse.data.length > 0) {
             credits = 'API key valid, but credits info unavailable';
@@ -48,7 +48,6 @@ export async function POST(req: NextRequest) {
     } else if (provider === 'anthropic') {
       try {
         const anthropic = new Anthropic({ apiKey });
-        // Anthropic doesn't have a public credits API, so we'll just verify the key
         const response = await fetch('https://api.anthropic.com/v1/models', {
           headers: {
             'x-api-key': apiKey,

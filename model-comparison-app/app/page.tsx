@@ -37,7 +37,7 @@ export default function Home() {
     },
   });
 
-  // Load saved values from localStorage on initial render
+  //Load saved values from localStorage on initial render
   useEffect(() => {
     const savedConfig = localStorage.getItem('modelConfig');
     if (savedConfig) {
@@ -46,13 +46,11 @@ export default function Home() {
         form.setValue('modelA', config.modelA);
         form.setValue('modelB', config.modelB);
         
-        // Check if modelA is a custom model
         if (!availableModels.some(model => model.value === config.modelA)) {
           form.setValue('customModelA', config.modelA);
           form.setValue('modelA', 'custom');
         }
         
-        // Check if modelB is a custom model
         if (!availableModels.some(model => model.value === config.modelB)) {
           form.setValue('customModelB', config.modelB);
           form.setValue('modelB', 'custom');
@@ -83,16 +81,13 @@ export default function Home() {
     router.push('/chat');
   };
 
-  // Get the currently selected model A to filter model B options
   const selectedModelA = form.watch('modelA');
   const selectedModelB = form.watch('modelB');
   
-  // Filter available models for model B to exclude the one selected for model A
   const modelBOptions = availableModels.filter(model => 
     model.value !== (selectedModelA === 'custom' ? form.watch('customModelA') : selectedModelA)
   );
   
-  // Filter available models for model A to exclude the one selected for model B
   const modelAOptions = availableModels.filter(model => 
     model.value !== (selectedModelB === 'custom' ? form.watch('customModelB') : selectedModelB)
   );
